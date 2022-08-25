@@ -1,46 +1,29 @@
-# Getting Started with Create React App
+# Todo app 요구사항
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## todo 추가하기
 
-## Available Scripts
+1. 입력창이 있어야 한다.
+2. todo 추가를 실행하면 입력한 내용이 목록에 추가된다.
+3. todo 추가를 실행하면 입력창이 비워져야 한다.
+4. todo 추가 실행 시 입력창이 비어있는 경우 오류메시지를 띄운다.
 
-In the project directory, you can run:
+cf) todo 추가는 입력 버튼, 입력창에서 엔터키 누르기 등으로 실행 가능
 
-### `yarn start`
+## todo 목록
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. 처음 접속시 지금까지 입력한 todo 중 완료되지 않은 todo가 목록으로 출력된다.
+2. 입력한 todo는 삭제할 수 있으며, 삭제한 경우 목록에서 제거된다.
+3. 입력한 todo는 완료처리 할 수 있으며, 완료처리된 경우 목록에서 숨겨진다.
+4. 완료된 todo는 별도로 정의된 방법으로 불러오거나 다시 숨길 수 있다.
+5. 모두 완료되거나 입력한 것이 없어 목록이 비어있을 경우 목록이 비어있다는 메시지를 출력해야 한다.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+cf) 삭제의 경우 다음 중 여러 개의 방식을 지원할 수 있다.
 
-### `yarn test`
+* 편집 모드 -> 선택 -> 삭제
+* 삭제 버튼 상시 표시
+* (모바일) 스와이프시 삭제 버튼 표시
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+cf) 완료된 todo의 경우 다음 중 하나의 방식을 지원할 수 있다.
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+* 미완료 / 완료 탭
+* 목록 상단 또는 하단에 완료된 todo 보기 버튼
