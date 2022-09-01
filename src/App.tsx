@@ -1,4 +1,4 @@
-import { nanoid } from "nanoid";
+import { v4 as uuid } from "uuid";
 import React from "react";
 import "./App.css";
 import Add from "./components/Add";
@@ -12,7 +12,7 @@ const App = () => {
   const [todos, setTodos] = React.useState<Todo[]>([]);
   const handleAdd = React.useCallback((newTodo: string) => {
     setTodos((prev) => [...prev, {
-      key: nanoid(),
+      key: uuid(),
       value: newTodo,
     }]);
   }, []);
@@ -22,7 +22,7 @@ const App = () => {
       <header className="App-header">
         <h1 data-testid="header-title">Todo List</h1>
       </header>
-      <main>
+      <main className="App-main">
         <ul data-testid="list">
           {todos.map(todo => <li key={todo.key}>{todo.value}</li>)}
         </ul>

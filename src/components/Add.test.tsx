@@ -25,21 +25,6 @@ describe("추가하기", () => {
     expect(input).toHaveAttribute("placeholder", "할 일을 입력하세요.");
   });
 
-  it("페이지에 접속하면 추가를 실행할 수 있는 방법을 제공해야 한다.", () => {
-    // given
-    const onAdd = jest.fn();
-    render(<Add onAdd={onAdd} />);
-    const input = screen.getByTestId("add-input");
-    const addButton = screen.getByTestId("add-button");
-
-    // when
-    fireEvent.click(addButton);
-    fireEvent.keyDown(input, { key: "Enter", code: "Enter", keyCode: 13 });
-
-    // then
-    expect(onAdd).toBeCalledTimes(2);
-  });
-
   describe("입력된 상태에서 엔터를 입력한 경우", () => {
     it("입력된 값을 함수에 넘겨줘야 한다.", () => {
       // given
@@ -66,6 +51,20 @@ describe("추가하기", () => {
 
       // then
       expect(input).toHaveValue("");
+    });
+
+    it("오류 상태를 보여주지 않아야 한다.", () => {
+      // given
+      render(<Add />);
+      const input = screen.getByTestId("add-input");
+      const inputWrapper = screen.getByTestId("add-wrapper");
+
+      // when
+      fireEvent.change(input, { target: { value: "Lorem Ipsum" } });
+      fireEvent.keyDown(input, { key: "Enter", code: "Enter", keyCode: 13 });
+
+      // then
+      expect(inputWrapper).not.toHaveClass("Add-error");
     });
   });
 
@@ -98,5 +97,74 @@ describe("추가하기", () => {
       // then
       expect(input).toHaveValue("");
     });
+
+    it("오류 상태를 보여주지 않아야 한다.", () => {
+      // given
+      render(<Add />);
+      const input = screen.getByTestId("add-input");
+      const addButton = screen.getByTestId("add-button");
+      const inputWrapper = screen.getByTestId("add-wrapper");
+
+      // when
+      fireEvent.change(input, { target: { value: "Dolor Sit" } });
+      fireEvent.click(addButton);
+
+      // then
+      expect(inputWrapper).not.toHaveClass("Add-error");
+    });
+
+    it("입력창에 포커스가 돌아가야 한다.", () => {
+      // given
+      render(<Add />);
+      const input = screen.getByTestId("add-input");
+      const addButton = screen.getByTestId("add-button");
+
+      // when
+      fireEvent.change(input, { target: { value: "Dolor Sit" } });
+      fireEvent.click(addButton);
+
+      // then
+      expect(input).toHaveFocus();
+    });
+  });
+
+  it("입력되지 않은 상태에서 엔터를 입력한 경우, 오류 상태를 보여줘야 한다.", () => {
+    // given
+    render(<Add />);
+    const input = screen.getByTestId("add-input");
+    const inputWrapper = screen.getByTestId("add-wrapper");
+
+    // when
+    fireEvent.keyDown(input, { key: "Enter", code: "Enter", keyCode: 13 });
+
+    // then
+    expect(inputWrapper).toHaveClass("Add-error");
+  });
+
+  it("입력되지 않은 상태에서 버튼을 클릭한 경우, 오류 상태를 보여줘야 한다.", () => {
+    // given
+    render(<Add />);
+    const inputWrapper = screen.getByTestId("add-wrapper");
+    const addButton = screen.getByTestId("add-button");
+
+    // when
+    fireEvent.click(addButton);
+
+    // then
+    expect(inputWrapper).toHaveClass("Add-error");
+  });
+
+  it("오류 상태에서 값을 입력한 경우 오류 상태를 보여주지 않아야 한다.", () => {
+    // given
+    render(<Add />);
+    const input = screen.getByTestId("add-input");
+    const inputWrapper = screen.getByTestId("add-wrapper");
+    fireEvent.keyDown(input, { key: "Enter", code: "Enter", keyCode: 13 });
+
+    // when
+    fireEvent.change(input, { target: { value: "Dolor Sit" } });
+
+    // then
+    expect(inputWrapper).not.toHaveClass("Add-error");
   });
 });

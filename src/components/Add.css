@@ -1,0 +1,63 @@
+.Add {
+  display: flex;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+}
+
+.Add.Add-error {
+  transition: outline 0.2s;
+  outline: 3px solid #e37ca0;
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  8.33% {
+    transform: translateX(-3px);
+  }
+  25% {
+    transform: translateX(3px);
+  }
+  41.67% {
+    transform: translateX(-3px);
+  }
+  58.33% {
+    transform: translateX(3px);
+  }
+  75% {
+    transform: translateX(-3px);
+  }
+  91.67% {
+    transform: translateX(3px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.Add-input {
+  display: block;
+  flex: 1;
+  height: 3em;
+  padding: 0 15px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  border: 1px #ddd solid;
+  border-right: 0;
+  border-radius: 8px 0 0 8px;
+  outline: none;
+}
+
+.Add-button {
+  display: block;
+  width: 80px;
+  height: 3em;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #ff84c3;
+  border: 0;
+  border-radius: 0 8px 8px 0;
+}
