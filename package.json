@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@swc/core": "^1.2.245",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -10,6 +11,7 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "nanoid": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -21,6 +23,28 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "extensionsToTreatAsEsm": [".ts", ".tsx"],
+    "moduleNameMapper": {
+      "^nanoid$": "<rootDir>/node_modules/nanoid/index.js"
+    },
+    "transform": {
+      ".+\\.(t|j)sx?$": [
+        "@swc/jest",
+        {
+          "jsc": {
+            "parser": {
+              "syntax": "typescript",
+              "tsx": true,
+              "dynamicImport": true,
+              "decorators": true
+            },
+            "target": "es2021"
+          }
+        }
+      ]
+    }
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +63,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.1.57",
+    "@swc/jest": "^0.2.22"
   }
 }
