@@ -25,7 +25,6 @@
     "eject": "react-scripts eject"
   },
   "jest": {
-    "extensionsToTreatAsEsm": [".ts", ".tsx"],
     "moduleNameMapper": {
       "^nanoid$": "<rootDir>/node_modules/nanoid/index.js"
     },
