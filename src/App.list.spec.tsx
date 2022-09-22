@@ -155,8 +155,8 @@ describe("App.list", () => {
     render(<App />);
 
     // when
-    const removeButton = screen.getByTestId("list-item-complete-3");
-    fireEvent.click(removeButton);
+    const completeButton = screen.getByTestId("list-item-complete-3");
+    fireEvent.click(completeButton);
 
     // then
     expect(globalThis.localStorage.getItem(LOCAL_STORAGE_KEY)).toBe(
@@ -165,6 +165,37 @@ describe("App.list", () => {
           { key: "1", value: "Lorem Ipsum" },
           { key: "2", value: "Dolor Sit", isComplete: true },
           { key: "3", value: "Amet", isComplete: true },
+        ],
+      }),
+    );
+  });
+
+  it("완료된 항목의 완료 버튼 클릭시 해당 todo가 저장소에서 미완료 항목으로 저장돼야 한다.", () => {
+    globalThis.localStorage.setItem(
+      LOCAL_STORAGE_KEY,
+      JSON.stringify({
+        data: [
+          { key: "1", value: "Lorem Ipsum" },
+          { key: "2", value: "Dolor Sit", isComplete: true },
+          { key: "3", value: "Amet" },
+        ],
+      }),
+    );
+    render(<App />);
+    const showCompleteCheckbox = screen.getByTestId("list-show-complete");
+    fireEvent.click(showCompleteCheckbox);
+
+    // when
+    const completeButton = screen.getByTestId("list-item-complete-2");
+    fireEvent.click(completeButton);
+
+    // then
+    expect(globalThis.localStorage.getItem(LOCAL_STORAGE_KEY)).toBe(
+      JSON.stringify({
+        data: [
+          { key: "1", value: "Lorem Ipsum" },
+          { key: "2", value: "Dolor Sit", isComplete: false },
+          { key: "3", value: "Amet" },
         ],
       }),
     );

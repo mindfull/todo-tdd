@@ -9,13 +9,15 @@ interface ListProps {
 }
 
 const List: FC<ListProps> = ({ todos, onChange }) => {
+  const [showComplete, setShowComplete] = React.useState(false);
+
   const handleItemChange = useCallback(
     (todo: Todo, actionType: ActionType) => {
       switch (actionType) {
         case "complete":
           onChange(
             todos.map((t) =>
-              t.key === todo.key ? { ...t, isComplete: true } : t,
+              t.key === todo.key ? { ...t, isComplete: !t.isComplete } : t,
             ),
           );
           return;
@@ -28,14 +30,41 @@ const List: FC<ListProps> = ({ todos, onChange }) => {
     [todos, onChange],
   );
 
+  const handleShowCompleteToggle = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setShowComplete(e.target.checked);
+    },
+    [],
+  );
+
+  const renderingTodos = showComplete
+    ? todos
+    : todos.filter((todo) => !todo.isComplete);
+
   return (
-    <ul className="List" data-testid="list">
-      {todos
-        .filter((todo) => !todo.isComplete)
-        .map((todo) => (
-          <ListItem key={todo.key} item={todo} onChange={handleItemChange} />
-        ))}
-    </ul>
+    <>
+      <div className="List-show-complete">
+        <input
+          id="show-complete"
+          data-testid="list-show-complete"
+          type="checkbox"
+          checked={showComplete}
+          onChange={handleShowCompleteToggle}
+        />
+        <label htmlFor="show-complete">완료한 항목 표시</label>
+      </div>
+      <ul className="List" data-testid="list">
+        {renderingTodos.length > 0 ? (
+          renderingTodos.map((todo) => (
+            <ListItem key={todo.key} item={todo} onChange={handleItemChange} />
+          ))
+        ) : (
+          <li className="ListItem ListItem-empty">
+            목록이 비어있습니다. 여유를 즐기세요!
+          </li>
+        )}
+      </ul>
+    </>
   );
 };
 

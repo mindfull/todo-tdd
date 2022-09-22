@@ -1,8 +1,26 @@
 .List {
-  margin: 2em 0;
+  margin: 0.5em 0 2em;
   padding: 0;
   list-style: none;
   list-style-image: none;
   border-top: 1px solid #e0e0e0;
   border-bottom: 1px solid #e0e0e0;
+}
+
+.List-show-complete {
+  margin-top: 2em;
+  text-align: right;
+  font-size: 0.875em;
+}
+
+.List-show-complete > input {
+  margin: 0.25em 0.5em 0.25em 0;
+  vertical-align: top;
+  width: 1em;
+  height: 1em;
+}
+
+.List-show-complete > label {
+  color: #666;
+  font-weight: 600;
 }

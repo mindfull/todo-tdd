@@ -48,7 +48,15 @@
 }
 
 .ListItem-complete:hover::after {
-  opacity: 0.5;
+  opacity: 0.2;
+}
+
+.ListItem-complete--completed::after {
+  opacity: 1;
+}
+
+.ListItem-complete--completed:hover::after {
+  opacity: 0.8;
 }
 
 .ListItem > span {
@@ -97,4 +105,11 @@
   background: #ff84c3;
   transform: rotate(45deg);
   border-radius: 1px;
+}
+
+.ListItem-empty {
+  width: 100%;
+  padding: 0.7em 0;
+  justify-content: center;
+  color: #999;
 }

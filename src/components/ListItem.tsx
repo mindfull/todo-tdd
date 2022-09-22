@@ -22,7 +22,9 @@ const ListItem: FC<ListItemProps> = ({ item, onChange }) => {
     <li className="ListItem" data-testid="list-item">
       <button
         type="button"
-        className="ListItem-complete"
+        className={`ListItem-complete ${
+          item.isComplete ? "ListItem-complete--completed" : ""
+        }`}
         data-testid={`list-item-complete-${item.key}`}
         onClick={handleComplete}
       >
