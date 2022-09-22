@@ -37,6 +37,10 @@ const App = () => {
 
   const handleChange = React.useCallback((newTodos: Todo[]) => {
     setTodos(newTodos);
+    globalThis.localStorage.setItem(
+      LOCAL_STORAGE_KEY,
+      JSON.stringify({ data: newTodos }),
+    );
   }, []);
 
   return (
